@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script>
+        $(function () {
+            $("form").submit(function () {
+                
+            })
+            $("#place").change(function () {
+                 var str="";
+                $("[type=checkbox]:checked").each(function () {
+                        str+=$(this).val()+" ";
+                    }
+                )
+                alert(str);
+                //alert($("#place option:selected").text());
+            })
+            $("#property").change(function () {
+                var state = $("#property option:selected").val();
+                if(state==1){
+                    $("#offwork").parent().prop("hidden",true);
+                    $("#workplace").parent().prop("hidden",true);
+                }
+                else if(state==2){
+                    $("#workplace").parent().prop("hidden",false);
+                    $("#offwork").parent().prop("hidden",true);
+                }
+                else {
+                    $("#workplace").parent().prop("hidden",true);
+                    $("#offwork").parent().prop("hidden",false);
+                }
+            })
+            $("[type=checkbox]").click(function () {
+                //alert($(this).val());
+                if($(this).val()=="無"){
+                    $("[type=checkbox]:lt(4)").prop("checked",false);
+                }
+                else {
+                    $("[type=checkbox]:eq(4)").prop("checked",false);
+                }
+            })
+            $("#birthday").blur(function () {
+                var reg = /^19|20[\d][\d]-1[0-2]|[1-9]-[12][\d]|3[01]$/;
+                if(!reg.test($(this).val())){
+                    $(this).val("生日輸入有誤");
+                }
+            });
+        })
+    </script>
+</head>
+<body style="list-style: square;font-family: SimSun">
+    <div style="width:400px;margin:0px auto;font-size:30px;font-weight: bold"><span>基业通信测试软体</span></div>
+    <div style="margin-left: 100px;">
+        <form action="#" method="post">
+            <table>
+                <ul style="list-style: square">
+                    <div>
+                        <tr>
+                            <td colspan="3">
+                                <li>
+                                    以下为注意事项
+                                </li>
+                            </td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td>
+                                <li style="list-style: disc"><span>名&nbsp;&nbsp;前:</span></li>
+                            </td>
+                            <td>
+                                <input type="text" maxlength="30">
+                            </td>
+                            <td><span style="color: red">最大输入长度30</span></td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td>
+                                <li style="list-style: disc"><span>出生日期:</span></li>
+                            </td>
+                            <td>
+                                <input type="text" maxlength="30" id="birthday">
+                            </td>
+                            <td><span style="color: red">最大输入长度30</span></td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td>
+                                <li style="list-style: disc"><span>工作地點:</span></li>
+                            </td>
+                            <td>
+                                <select name="place" id="place" style="width: 147px">
+                                    <option value="1">北京</option>
+                                    <option value="2">北京1</option>
+                                    <option value="3">北京2</option>
+                                    <option value="4">北京3</option>
+                                    <option value="5">北京4</option>
+                                    <option value="6">北京5</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td>
+                                <li style="list-style: disc"><span>狀&nbsp;&nbsp;態:</span></li>
+                            </td>
+                            <td>
+                                <select name="property" id="property" style="width: 147px">
+                                    <option value="1">在職</option>
+                                    <option value="2">出差</option>
+                                    <option value="3">離職</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div hidden>出差地點:<input type="text" id="workplace"></div>
+                                <div hidden>離職原因: <textarea id="offwork" cols="30" rows="3"></textarea></div>
+                            </td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td>
+                                <li style="list-style: disc"><span>興&nbsp;&nbsp;趣:</span></li>
+                            </td>
+                            <td>
+                                <div><input type="checkbox" value="籃球">籃球<input type="checkbox" value="足球">足球</div>
+                                <div><input type="checkbox" value="游泳">游泳<input type="checkbox" value="跑步">跑步</div>
+                                <div><input type="checkbox" value="無">無</div>
+                            </td>
+                        </tr>
+                    </div>
+                </ul>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
